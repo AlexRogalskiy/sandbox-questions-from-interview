@@ -1,0 +1,3 @@
+rootProject.name = "sandbox-questions-from-interview"
+
+include "examples:algorithms"
