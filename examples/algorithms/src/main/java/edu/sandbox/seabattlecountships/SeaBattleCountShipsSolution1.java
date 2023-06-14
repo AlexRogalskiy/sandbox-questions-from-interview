@@ -21,7 +21,7 @@ public class SeaBattleCountShipsSolution1 {
      *
      *              columnIndex
      *              |
-     * rawIndex -- {1, 1, 0, 0, 1, 0},
+     * rowIndex -- {1, 1, 0, 0, 1, 0},
      *             {0, 0, 0, 0, 1, 0}, -- отсюда мы будем начинать проверять есть ли у соседней верхней ячейки значение 1 или 0, чтобы учесть вертикальную расстановку
      *             {1, 0, 1, 0, 1, 0},
      *             {0, 0, 0, 0, 0, 0},
@@ -30,13 +30,13 @@ public class SeaBattleCountShipsSolution1 {
      */
     public static int countShips(int[][] matrix) {
         int amountOfShips = 0;
-        for (int rawIndex = 0; rawIndex < matrix.length; rawIndex++) {
+        for (int rowIndex = 0; rowIndex < matrix.length; rowIndex++) {
             boolean isShipPartStarted = false; // сбрасываем для того чтобы если предыдущая строка закончилась на 1, мы не думали что на следующей строке это продолжение коробля
             for (int columnIndex = 0; columnIndex < matrix.length; columnIndex++) {
-                int cellValue = matrix[rawIndex][columnIndex]; // получаем значение текущей ячейки
+                int cellValue = matrix[rowIndex][columnIndex]; // получаем значение текущей ячейки
                 int higherCellValue = -1;
-                if (rawIndex != 0) { // чтобы не проверять верхнюю ячейку на первой строке
-                    higherCellValue = matrix[rawIndex - 1][columnIndex]; // получаем значение ячейки выше, в той же колонке, чтобы понять является ли текущая ячейка частью коробля выше
+                if (rowIndex != 0) { // чтобы не проверять верхнюю ячейку на первой строке
+                    higherCellValue = matrix[rowIndex - 1][columnIndex]; // получаем значение ячейки выше, в той же колонке, чтобы понять является ли текущая ячейка частью коробля выше
                 }
                 // если у нас ячейка равна единице и она не является следующей частью корабля не по горизонтали не повертикали
                 if (cellValue == CELL_WITH_SHIP_OR_PART && !isShipPartStarted && higherCellValue != CELL_WITH_SHIP_OR_PART) {

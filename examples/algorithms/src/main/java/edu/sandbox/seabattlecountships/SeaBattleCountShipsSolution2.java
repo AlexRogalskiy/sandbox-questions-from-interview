@@ -29,7 +29,7 @@ public class SeaBattleCountShipsSolution2 {
      *
      *              columnIndex
      *              |
-     * rawIndex -- {1, 1, 0, 0, 1, 0},
+     * rowIndex -- {1, 1, 0, 0, 1, 0},
      *             {0, 0, 0, 0, 1, 0},
      *             {1, 0, 1, 0, 1, 0},
      *             {0, 0, 0, 0, 0, 0},
@@ -45,13 +45,13 @@ public class SeaBattleCountShipsSolution2 {
         }
 
         int amountOfShips = 0;
-        for (int rawIndex = 0; rawIndex < matrix.length; rawIndex++) {
+        for (int rowIndex = 0; rowIndex < matrix.length; rowIndex++) {
             for (int columnIndex = 0; columnIndex < matrix.length; columnIndex++) {
 
-                Cell cell = checkedMatrix[rawIndex][columnIndex];
+                Cell cell = checkedMatrix[rowIndex][columnIndex];
                 if (cell.value == 1 && !cell.checked) {
                     amountOfShips++;
-                    for (int verticalIndex = rawIndex + 1; verticalIndex < matrix.length; verticalIndex++) {
+                    for (int verticalIndex = rowIndex + 1; verticalIndex < matrix.length; verticalIndex++) {
                         var verticalCell = checkedMatrix[verticalIndex][columnIndex];
                         if (verticalCell.value == 1) {
                             verticalCell.checked = true;
@@ -61,7 +61,7 @@ public class SeaBattleCountShipsSolution2 {
                     }
 
                     for (int horizontalIndex = columnIndex; horizontalIndex < matrix.length; horizontalIndex++) {
-                        var horizontalCell = checkedMatrix[rawIndex][horizontalIndex];
+                        var horizontalCell = checkedMatrix[rowIndex][horizontalIndex];
                         if (horizontalCell.value == 1) {
                             horizontalCell.checked = true;
                         } else {
