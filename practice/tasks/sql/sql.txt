@@ -1,0 +1,51 @@
+# TODO: Refactor examples and use sqllite to test solutions with test data
+
+# TASK 1
+-------------------------------------------------------------------------
+CREATE TABLE profile
+(
+id            BIGSERIAL PRIMARY KEY,
+nickname      VARCHAR,
+registered_at TIMESTAMP
+);
+
+CREATE TABLE post
+(
+id          BIGSERIAL PRIMARY KEY,
+owner_id    BIGINT REFERENCES profile (id),
+body        TEXT,
+inserted_at TIMESTAMP,
+likes_count INT -- кол-во лайков
+);
+
+CREATE TABLE subscription_count
+(
+profile_id      BIGINT REFERENCES profile (id) UNIQUE,
+followers_count INT, -- кол-во подписчиков
+following_count INT  -- кол-во подписок
+);
+
+- Выбери все профили, у которых больше 1000 подписчиков
+SELECT * from profile
+JOIN subscription_count ON profile.id == subscription_count.profile_id
+WHERE subscription_count.followers_count > 1000
+
+- Выбери профили, у которых больше 10 постов
+SELECT * from profile, COUNT(post) as post_amount
+JOIN post ON post.owner_id == profile.id
+WHERE post_amount > 10
+
+# TASK 2
+-------------------------------------------------------------------------
+нужно найти те А строки где нету ссылок из Б
+A
+id
+col1
+col2
+
+B
+id
+a_id
+col3
+
+select * from A LEFT OUTER JOIN B ON a_id = b.a_id WHERE b.id AND b.a_id is null

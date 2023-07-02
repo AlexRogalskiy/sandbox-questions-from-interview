@@ -1,0 +1,6 @@
+rootProject.name = "practice"
+
+include "tasks:algorithms"
+include "tasks:collections"
+include "tasks:project-reactor"
+include "tasks:sql"
